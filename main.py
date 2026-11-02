@@ -1,14 +1,17 @@
 import os
+import threading
 from dotenv import load_dotenv
+from server import run_server
 
 import requests
 import discord
 from discord.ext import commands
 
+threading.Thread(target=run_server, daemon=True).start()
+
 load_dotenv()
 TOKEN=os.getenv("TOKEN")
 
-print(TOKEN)
 
 intents = discord.Intents.default()
 intents.message_content = True
