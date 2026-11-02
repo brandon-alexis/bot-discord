@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 
+import requests
 import discord
 from discord.ext import commands
 
@@ -21,6 +22,17 @@ async def on_ready():
 @bot.command()
 async def test(ctx, arg):
     await ctx.send(f'Hello {arg}')
+
+@bot.command()
+async def ping(ctx, arg):
+    result = requests.get("https://rickandmortyapi.com/api/character/" + arg)
+    
+    if result.status_code != 200:
+        await ctx.send("Personaje no encontrado")
+    else:
+        image_url = result.json()["image"]
+        print(image_url)
+        await ctx.send(image_url)
 
 bot.run(TOKEN)
 
