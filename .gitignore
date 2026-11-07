@@ -5,3 +5,9 @@ __pycache__
 .env
 !.env.example
 
+# Base de datos SQLite local
+data/
+*.db
+*.db-wal
+*.db-shm
+
